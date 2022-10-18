@@ -12,11 +12,16 @@ function Card({ data }: { data: CardType }) {
     <div style={{ height: 510 }}>
       <Preview
         data={data}
-        changeSelection={setIsSelected}
         isSelected={isSelected}
         isDisabled={isDisabled}
+        changeSelection={setIsSelected}
       />
-      <Footer />
+      <Footer
+        data={data}
+        isSelected={isSelected}
+        isDisabled={isDisabled}
+        changeSelection={setIsSelected}
+      />
     </div>
   );
 }
