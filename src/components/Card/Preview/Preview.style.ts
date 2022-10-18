@@ -96,59 +96,59 @@ export default createUseStyles({
     transition: "0.3s",
   },
 
-  // selected: {
-  //   background: "#D91667",
+  selected: {
+    background: "#D91667",
 
-  //   "& $description__weight": {
-  //     background: "#D91667",
-  //   },
+    "& $description__weight": {
+      background: "#D91667",
+    },
 
-  //   "&:hover": {
-  //     background: "#E52E7A",
+    "&:hover": {
+      background: "#E52E7A",
 
-  //     "& $description__weight": {
-  //       background: "#E52E7A",
-  //     },
+      "& $description__weight": {
+        background: "#E52E7A",
+      },
 
-  //     "& $preview__description:before": {
-  //       content: "'Котэ не одобряет?'",
-  //       color: "#E62E7A",
-  //     },
-  //   },
-  // },
+      "& $preview__description:before": {
+        content: "'Kote disapproves?'",
+        color: "#E62E7A",
+      },
+    },
+  },
 
-  // selected_hover: {
-  //   "&:hover": {
-  //     background: "#D91667",
+  selected_hover: {
+    "&:hover": {
+      background: "#D91667",
 
-  //     "& $description__weight": {
-  //       background: "#D91667",
-  //     },
+      "& $description__weight": {
+        background: "#D91667",
+      },
 
-  //     "& $preview__description:before": {
-  //       content: "'Сказочное заморское яство'",
-  //       color: "#666666",
-  //     },
-  //   },
-  // },
+      "& $preview__description:before": {
+        content: "'Delicious overseas food'",
+        color: "#666666",
+      },
+    },
+  },
 
-  // disabled: {
-  //   background: "#B3B3B3",
-  //   pointerEvents: "none",
+  disabled: {
+    background: "#B3B3B3",
+    pointerEvents: "none",
 
-  //   "-webkit-touch-callout": "none" /* iOS Safari */,
-  //   "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
-  //   "-khtml-user-select": "none" /* Konqueror */,
-  //   "-moz-user-select": "none" /* Firefox */,
-  //   "-ms-user-select": "none" /* Internet Explorer/Edge */,
-  //   "user-select": "none",
+    "-webkit-touch-callout": "none" /* iOS Safari */,
+    "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
+    "-khtml-user-select": "none" /* Konqueror */,
+    "-moz-user-select": "none" /* Firefox */,
+    "-ms-user-select": "none" /* Internet Explorer/Edge */,
+    "user-select": "none",
 
-  //   "& $description__weight": {
-  //     background: "#B3B3B3",
-  //   },
-  //   "& $preview": {
-  //     zIndex: 1000,
-  //     opacity: "45%",
-  //   },
-  // },
+    "& $description__weight": {
+      background: "#B3B3B3",
+    },
+    "& $preview__inner": {
+      zIndex: 1000,
+      opacity: "45%",
+    },
+  },
 });

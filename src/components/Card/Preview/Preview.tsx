@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { WEIGHT_PER_SERVING } from "../../../constants/card.constant";
 import { CardType } from "../../../types/card.type";
 import styles from "./Preview.style";
@@ -6,9 +6,41 @@ import styles from "./Preview.style";
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
 
-function Preview({ data }: { data: CardType }) {
+function Preview({
+  data,
+  isSelected,
+  changeSelection,
+  isDisabled,
+}: {
+  data: CardType;
+  isSelected: boolean;
+  changeSelection: React.Dispatch<React.SetStateAction<boolean>>;
+  isDisabled: boolean;
+}) {
   const classes = styles();
   const previewContainer = useRef(null);
+
+  const onSelectCard = () => {
+    changeSelection((selection: boolean) => !selection);
+  };
+
+  useEffect(() => {
+    const preview: HTMLDivElement | null = previewContainer.current;
+    if (!preview) return;
+
+    const cardLeaveHandler = () => {
+      console.log("mouse left a card");
+      previewElement.classList.remove(classes.selected_hover);
+      previewElement.removeEventListener("mouseleave", cardLeaveHandler);
+    };
+
+    const previewElement: HTMLDivElement = preview as HTMLDivElement;
+    previewElement.addEventListener("mouseleave", cardLeaveHandler);
+
+    if (!isSelected)
+      return previewElement.removeEventListener("mouseleave", cardLeaveHandler);
+    previewElement.classList.add(classes.selected_hover);
+  }, [isSelected]);
 
   const countTotalWeight = () => data.servingsAmount * WEIGHT_PER_SERVING;
   const servingsWordForms = { singular: "serving", plural: "servings" };
@@ -16,7 +48,13 @@ function Preview({ data }: { data: CardType }) {
   const mouseWordForms = { singular: "mice", plural: "mouses" };
 
   return (
-    <div ref={previewContainer} className={classes.preview}>
+    <div
+      ref={previewContainer}
+      className={`${classes.preview} ${isSelected && classes.selected} ${
+        isDisabled && classes.disabled
+      }`}
+      onClick={onSelectCard}
+    >
       <div className={classes.preview__inner}>
         <div className={classes.preview__description}>
           <h2 className={classes.description__title}>Yummy</h2>

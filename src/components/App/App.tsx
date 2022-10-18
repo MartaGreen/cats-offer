@@ -10,7 +10,9 @@ function App() {
 
   return (
     <>
-      <h1>Do you feed your cat today?</h1>
+      <header className={classes.header}>
+        <h1 className={classes.header__title}>Do you feed your cat today?</h1>
+      </header>
 
       <main className={classes.main}>
         {CARDS_DATA.map((data: CardType) => (

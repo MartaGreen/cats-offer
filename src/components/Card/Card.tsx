@@ -10,7 +10,12 @@ function Card({ data }: { data: CardType }) {
 
   return (
     <div style={{ height: 510 }}>
-      <Preview data={data} />
+      <Preview
+        data={data}
+        changeSelection={setIsSelected}
+        isSelected={isSelected}
+        isDisabled={isDisabled}
+      />
       <Footer />
     </div>
   );
