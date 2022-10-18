@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+input {
+  -webkit-appearance: none !important;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+}

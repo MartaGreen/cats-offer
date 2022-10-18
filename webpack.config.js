@@ -39,6 +39,14 @@ module.exports = {
           publicPath: "/images",
         },
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "fonts/[name].[ext]",
+          publicPath: "/fonts",
+        },
+      },
     ],
   },
 
@@ -50,6 +58,7 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
       "@components": path.resolve(__dirname, "src/components"),
+      "@images": path.resolve(__dirname, "assets/images"),
     },
   },
 
