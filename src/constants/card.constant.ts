@@ -7,14 +7,14 @@ const idGenerator = (): string => {
 const CARDS_DATA: CardType[] = [
   {
     id: idGenerator(),
-    taste: "с фуа-гра",
+    taste: "foie gras",
     servingsAmount: 10,
 
     selectedMsg: "Печень утки разварная с артишоками.",
   },
   {
     id: idGenerator(),
-    taste: "с рыбой",
+    taste: "fish",
     servingsAmount: 40,
     isSelected: true,
 
@@ -22,12 +22,15 @@ const CARDS_DATA: CardType[] = [
   },
   {
     id: idGenerator(),
-    taste: "с курой",
+    taste: "chicken",
     servingsAmount: 100,
     isDisabled: true,
 
     selectedMsg: "Филе из цыплят с трюфелями в бульоне.",
   },
 ];
+
+// we have 0.5 kg of feed and 10 servings.
+export const WEIGHT_PER_SERVING = 0.05;
 
 export default CARDS_DATA;

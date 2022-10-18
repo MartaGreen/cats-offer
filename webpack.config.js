@@ -35,8 +35,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: "images/[name].[ext]",
-          clean: true,
-          publicPath: "/images",
+          publicPath: "/",
         },
       },
       {
@@ -44,7 +43,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: "fonts/[name].[ext]",
-          publicPath: "/fonts",
+          publicPath: "/",
         },
       },
     ],

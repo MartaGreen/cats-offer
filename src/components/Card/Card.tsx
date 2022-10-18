@@ -10,7 +10,7 @@ function Card({ data }: { data: CardType }) {
 
   return (
     <div>
-      <Preview />
+      <Preview data={data} />
       <Footer />
     </div>
   );
