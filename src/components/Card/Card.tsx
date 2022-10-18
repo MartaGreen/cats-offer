@@ -9,7 +9,7 @@ function Card({ data }: { data: CardType }) {
   const [isSelected, setIsSelected] = useState(data.isSelected || false);
 
   return (
-    <div>
+    <div style={{ height: 510 }}>
       <Preview data={data} />
       <Footer />
     </div>
