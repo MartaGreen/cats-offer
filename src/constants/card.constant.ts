@@ -10,7 +10,7 @@ const CARDS_DATA: CardType[] = [
     taste: "foie gras",
     servingsAmount: 10,
 
-    selectedMsg: "Печень утки разварная с артишоками.",
+    selectedMsg: "Duck liver boiled with artichokes.",
   },
   {
     id: idGenerator(),
@@ -18,7 +18,7 @@ const CARDS_DATA: CardType[] = [
     servingsAmount: 40,
     isSelected: true,
 
-    selectedMsg: "Головы щучьи с чесноком да свежайшая сёмгушка.",
+    selectedMsg: "Pike heads with garlic and fresh salmon.",
   },
   {
     id: idGenerator(),
@@ -26,7 +26,7 @@ const CARDS_DATA: CardType[] = [
     servingsAmount: 100,
     isDisabled: true,
 
-    selectedMsg: "Филе из цыплят с трюфелями в бульоне.",
+    selectedMsg: "Chicken fillet with truffles in broth.",
   },
 ];
 

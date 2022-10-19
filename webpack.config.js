@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "build"),
     filename: "bundle.js",
-    publicPath: "/",
+    publicPath: "",
     clean: true,
   },
 
@@ -35,7 +35,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: "images/[name].[ext]",
-          publicPath: "/",
+          publicPath: "",
         },
       },
       {
@@ -43,7 +43,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: "fonts/[name].[ext]",
-          publicPath: "/",
+          publicPath: "",
         },
       },
     ],
