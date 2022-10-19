@@ -10,6 +10,7 @@ export default createUseStyles({
     textAlign: "center",
     color: "#FFFFFF",
     lineHeight: "42px",
+    fontWeight: 200,
 
     marginBottom: 26,
   },
