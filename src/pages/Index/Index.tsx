@@ -12,6 +12,9 @@ function Index() {
   const classes = styles();
   const cartStore = useSelector((data: StoreType) => data.cart);
 
+  const storageCards = JSON.parse(localStorage.getItem("cards") || "[]");
+  const cardsData: CardType[] = storageCards.length ? storageCards : CARDS_DATA;
+
   return (
     <>
       <header className={classes.header}>
@@ -24,7 +27,7 @@ function Index() {
       </header>
 
       <main className={classes.main}>
-        {CARDS_DATA.map((data: CardType) => (
+        {cardsData.map((data: CardType) => (
           <Card key={data.id} data={data} />
         ))}
       </main>

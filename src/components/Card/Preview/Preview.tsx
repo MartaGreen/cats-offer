@@ -4,7 +4,6 @@ import { CardType } from "../../../types/card.type";
 import styles from "./Preview.style";
 
 import { useDispatch, useSelector } from "react-redux";
-import StoreType from "../../../types/store.type";
 import { addItem, rmItem } from "../../../redux/slices/cart";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
@@ -32,7 +31,7 @@ function Preview({
   };
 
   useEffect(() => {
-    if (isSelected) dispatch(addItem(data));
+    if (isSelected && !localStorage.getItem("cart")) dispatch(addItem(data));
   }, []);
 
   useEffect(() => {

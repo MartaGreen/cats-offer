@@ -19,12 +19,12 @@ export default createUseStyles({
   },
 
   item__td: {
-    border: "3px solid #fff",
+    borderBottom: "1px solid #fff",
     textAlign: "center",
-    padding: "0 25px",
+    padding: "0 15px",
 
     "&:first-child": {
-      width: 50,
+      width: 30,
     },
   },
 
@@ -37,15 +37,21 @@ export default createUseStyles({
   },
   item__selection_styled: {
     display: "inline-block",
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     border: "2px solid #fff",
     borderRadius: "50%",
   },
 
   item__buy: {
-    backgroundColor: "#fff",
-    border: "none",
-    color: "#000",
+    backgroundColor: "none",
+    border: "2px solid #fff",
+    color: "#fff",
+
+    "&:hover": {
+      backgroundColor: "#fff",
+      color: "#000",
+      cursor: "pointer",
+    },
   },
 });
