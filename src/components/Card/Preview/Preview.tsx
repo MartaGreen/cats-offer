@@ -5,7 +5,7 @@ import styles from "./Preview.style";
 
 import { useDispatch, useSelector } from "react-redux";
 import StoreType from "../../../types/store";
-import { addItem } from "../../../redux/slices/cart";
+import { addItem, rmItem } from "../../../redux/slices/cart";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
@@ -29,6 +29,7 @@ function Preview({
   const onSelectCard = () => {
     changeSelection((selection: boolean) => !selection);
     if (!isSelected) dispatch(addItem(data));
+    if (isSelected) dispatch(rmItem(data));
   };
 
   useEffect(() => {

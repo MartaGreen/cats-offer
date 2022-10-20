@@ -8,7 +8,9 @@ export const cartSlice = createSlice({
     addItem: (state: CardType[], action: PayloadAction<CardType>) => {
       state.push(action.payload);
     },
-    rmItem: () => {},
+    rmItem: (state: CardType[], action: PayloadAction<CardType>) => {
+      state.filter((item: CardType) => item !== action.payload);
+    },
     getCartItems: () => {},
     getCartItemsCounter: () => {},
   },
