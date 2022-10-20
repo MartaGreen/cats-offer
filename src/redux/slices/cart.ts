@@ -9,13 +9,12 @@ export const cartSlice = createSlice({
       state.push(action.payload);
     },
     rmItem: (state: CardType[], action: PayloadAction<CardType>) => {
-      state.filter((item: CardType) => item !== action.payload);
+      return state.filter((item: CardType) => {
+        return item.id !== action.payload.id;
+      });
     },
-    getCartItems: () => {},
-    getCartItemsCounter: () => {},
   },
 });
 
-export const { addItem, rmItem, getCartItems, getCartItemsCounter } =
-  cartSlice.actions;
+export const { addItem, rmItem } = cartSlice.actions;
 export default cartSlice.reducer;

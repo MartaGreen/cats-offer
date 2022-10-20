@@ -25,6 +25,11 @@ export default createUseStyles({
     top: 0,
   },
 
+  header__cart: {
+    color: "#fff",
+    textDecoration: "none",
+  },
+
   main: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(300px, 320px))",

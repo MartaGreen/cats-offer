@@ -4,7 +4,7 @@ import { CardType } from "../../../types/card.type";
 import styles from "./Preview.style";
 
 import { useDispatch, useSelector } from "react-redux";
-import StoreType from "../../../types/store";
+import StoreType from "../../../types/store.type";
 import { addItem, rmItem } from "../../../redux/slices/cart";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
@@ -24,13 +24,16 @@ function Preview({
   const classes = styles();
   const previewContainer = useRef(null);
   const dispatch = useDispatch();
-  const cartStore = useSelector((data: StoreType) => data.cart);
 
   const onSelectCard = () => {
     changeSelection((selection: boolean) => !selection);
     if (!isSelected) dispatch(addItem(data));
     if (isSelected) dispatch(rmItem(data));
   };
+
+  useEffect(() => {
+    if (isSelected) dispatch(addItem(data));
+  }, []);
 
   useEffect(() => {
     const preview: HTMLDivElement | null = previewContainer.current;
