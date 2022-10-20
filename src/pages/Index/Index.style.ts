@@ -2,7 +2,11 @@ import { createUseStyles } from "react-jss";
 
 export default createUseStyles({
   header: {
-    margin: "0 0 50px 0",
+    position: "relative",
+    // margin: "0 0 50px 0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   header__title: {
@@ -13,6 +17,12 @@ export default createUseStyles({
     fontWeight: 200,
 
     marginBottom: 26,
+  },
+
+  header__nav: {
+    position: "absolute",
+    right: "5%",
+    top: 0,
   },
 
   main: {
