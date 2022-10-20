@@ -1,25 +1,18 @@
 import React from "react";
 import styles from "./App.style";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import CARDS_DATA from "../../constants/card.constant";
-import { CardType } from "../../types/card.type";
-import Card from "../Card/Card";
+import Index from "../../pages/Index/Index";
 
 function App() {
   const classes = styles();
 
   return (
-    <>
-      <header className={classes.header}>
-        <h1 className={classes.header__title}>Do you feed your cat today?</h1>
-      </header>
-
-      <main className={classes.main}>
-        {CARDS_DATA.map((data: CardType) => (
-          <Card key={data.id} data={data} />
-        ))}
-      </main>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Index />} />
+      </Routes>
+    </Router>
   );
 }
 
