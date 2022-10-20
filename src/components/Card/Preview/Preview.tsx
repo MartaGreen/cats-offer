@@ -3,6 +3,10 @@ import { WEIGHT_PER_SERVING } from "../../../constants/card.constant";
 import { CardType } from "../../../types/card.type";
 import styles from "./Preview.style";
 
+import { useDispatch, useSelector } from "react-redux";
+import StoreType from "../../../types/store";
+import { addItem } from "../../../redux/slices/cart";
+
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
 
@@ -19,9 +23,12 @@ function Preview({
 }) {
   const classes = styles();
   const previewContainer = useRef(null);
+  const dispatch = useDispatch();
+  const cartStore = useSelector((data: StoreType) => data.cart);
 
   const onSelectCard = () => {
     changeSelection((selection: boolean) => !selection);
+    if (!isSelected) dispatch(addItem(data));
   };
 
   useEffect(() => {
