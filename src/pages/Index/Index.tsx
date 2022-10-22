@@ -8,6 +8,8 @@ import Card from "../../components/Card/Card";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import CustomCard from "../../components/customCard/CustomCard";
+
 function Index() {
   const classes = styles();
   const cartStorage = useSelector((data: StoreType) => data.cart);
@@ -32,6 +34,8 @@ function Index() {
         {cardsStorage.map((data: CardType) => (
           <Card key={data.id} data={data} />
         ))}
+
+        <CustomCard />
       </main>
     </>
   );
