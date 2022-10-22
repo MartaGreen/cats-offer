@@ -33,10 +33,6 @@ function Preview({
   };
 
   useEffect(() => {
-    // if (isSelected && !localStorage.getItem("cart")) dispatch(addItem(data));
-  }, []);
-
-  useEffect(() => {
     const preview: HTMLDivElement | null = previewContainer.current;
     if (!preview) return;
 

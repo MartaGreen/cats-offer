@@ -22,7 +22,7 @@ const cardsSlice = createSlice({
       const stateObject: CardType[] = current(state);
       const index: number = stateObject.indexOf(selectedCard);
       state[index].isSelected = !state[index].isSelected;
-      const saveState = state;
+      setStorageData("cards", state);
       return state;
     },
   },

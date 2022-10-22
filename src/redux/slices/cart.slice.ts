@@ -18,9 +18,6 @@ export const cartSlice = createSlice({
       const updatedState = state.filter(
         (item: CardType) => item.id !== action.payload.id
       );
-      updatedState.forEach((item: any) => {
-        console.log(item);
-      });
       updateCartStorage(updatedState);
       return updatedState;
     },
