@@ -4,7 +4,8 @@ import { CardType } from "../../../types/card.type";
 import styles from "./Preview.style";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, rmItem } from "../../../redux/slices/cart";
+import { addItem, rmItem } from "../../../redux/slices/cart.slice";
+import { cardSelectionChange } from "../../../redux/slices/cards.slice";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
@@ -28,10 +29,11 @@ function Preview({
     changeSelection((selection: boolean) => !selection);
     if (!isSelected) dispatch(addItem(data));
     if (isSelected) dispatch(rmItem(data));
+    dispatch(cardSelectionChange(data));
   };
 
   useEffect(() => {
-    if (isSelected && !localStorage.getItem("cart")) dispatch(addItem(data));
+    // if (isSelected && !localStorage.getItem("cart")) dispatch(addItem(data));
   }, []);
 
   useEffect(() => {

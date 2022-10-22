@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Index.style";
-import CARDS_DATA from "../../constants/card.constant";
+import CARDS_DEFAULT_DATA from "../../constants/card.constant";
 import { CardType } from "../../types/card.type";
 import StoreType from "../../types/store.type";
 
@@ -10,10 +10,12 @@ import { useSelector } from "react-redux";
 
 function Index() {
   const classes = styles();
-  const cartStore = useSelector((data: StoreType) => data.cart);
+  const cartStorage = useSelector((data: StoreType) => data.cart);
+  const cardsStorage = useSelector((data: StoreType) => data.cards);
 
-  const storageCards = JSON.parse(localStorage.getItem("cards") || "[]");
-  const cardsData: CardType[] = storageCards.length ? storageCards : CARDS_DATA;
+  useEffect(() => {
+    console.log("cartStorage", cartStorage);
+  }, [cartStorage]);
 
   return (
     <>
@@ -21,13 +23,13 @@ function Index() {
         <h1 className={classes.header__title}>Do you feed your cat today?</h1>
         <nav className={classes.header__nav}>
           <Link to="/cart" className={classes.header__cart}>
-            Cart {cartStore.length}
+            Cart {cartStorage.length}
           </Link>
         </nav>
       </header>
 
       <main className={classes.main}>
-        {cardsData.map((data: CardType) => (
+        {cardsStorage.map((data: CardType) => (
           <Card key={data.id} data={data} />
         ))}
       </main>

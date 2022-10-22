@@ -4,6 +4,7 @@ import { CardType } from "./card.type";
 
 type StoreType = {
   cart: CardType[];
+  cards: CardType[];
 };
 
 export default StoreType;

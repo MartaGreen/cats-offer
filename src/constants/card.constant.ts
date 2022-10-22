@@ -4,7 +4,7 @@ const idGenerator = (): string => {
   return `c_${Math.floor(Math.random() * 100)}`;
 };
 
-const CARDS_DATA: CardType[] = [
+const CARDS_DEFAULT_DATA: CardType[] = [
   {
     id: idGenerator(),
     taste: "foie gras",
@@ -33,4 +33,4 @@ const CARDS_DATA: CardType[] = [
 // we have 0.5 kg of feed and 10 servings.
 export const WEIGHT_PER_SERVING = 0.05;
 
-export default CARDS_DATA;
+export default CARDS_DEFAULT_DATA;

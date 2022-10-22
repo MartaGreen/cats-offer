@@ -1,16 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CardType } from "../../types/card.type";
+import { getStorageData, setStorageData } from "../shared/storage";
 
 const updateCartStorage = (data: CardType[]) => {
-  localStorage.setItem("cart", JSON.stringify(data));
+  setStorageData("cart", data);
 };
-const cartStorage: CardType[] = JSON.parse(
-  localStorage.getItem("cart") || "[]"
-);
 
 export const cartSlice = createSlice({
   name: "cart",
-  initialState: cartStorage.length ? cartStorage : ([] as CardType[]),
+  initialState: getStorageData("cart"),
   reducers: {
     addItem: (state: CardType[], action: PayloadAction<CardType>) => {
       updateCartStorage(state);
