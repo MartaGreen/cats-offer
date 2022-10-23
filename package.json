@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "build": "webpack --mode=production",
     "deploy": "gh-pages -d build"
   },
   "repository": {
@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/MartaGreen/cats-offer/issues"
   },
-  "homepage": "https://github.com/MartaGreen/cats-offer#readme",
+  "homepage": "https://github.com/MartaGreen/cats-offer",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "react": "^18.2.0",
