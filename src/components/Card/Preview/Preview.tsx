@@ -54,10 +54,6 @@ function Preview({
   const mousesAmount = Math.ceil(data.servingsAmount / 20);
   const mouseWordForms = { singular: "mice", plural: "mouses" };
 
-  const onDeleteCard = () => {
-    dispatch(rmCard(data));
-  };
-
   return (
     <div
       ref={previewContainer}
@@ -67,7 +63,6 @@ function Preview({
       onClick={onSelectCard}
     >
       <div className={classes.preview__inner}>
-        <div className={classes.preview__delete} onClick={onDeleteCard}></div>
         <div className={classes.preview__description}>
           <h2 className={classes.description__title}>Yummy</h2>
           <h3 className={classes.description__taste}>{data.taste}</h3>

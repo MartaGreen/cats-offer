@@ -3,6 +3,7 @@ import { CardType } from "../../types/card.type";
 
 import Preview from "./Preview/Preview";
 import Footer from "./Footer/Footer";
+import Delete from "./Delete/Delete";
 
 function Card({ data }: { data: CardType }) {
   const [isDisabled, setIsDisabled] = useState(data.isDisabled || false);
@@ -22,6 +23,7 @@ function Card({ data }: { data: CardType }) {
         isDisabled={isDisabled}
         changeSelection={setIsSelected}
       />
+      <Delete data={data} />
     </div>
   );
 }
