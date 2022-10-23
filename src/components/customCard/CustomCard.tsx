@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import idGenerator from "../../shared/idGenerator";
 import previewStyles from "../Card/Preview/Preview.style";
 import styles from "./CustomCard.style";
 import DataField from "./DataField/DataField";
+import { addCard } from "../../redux/slices/cards.slice";
+import { CardType } from "../../types/card.type";
 
 export type createCardDataType = {
   taste: string;
@@ -25,6 +29,7 @@ function CustomCard() {
 
   const previewCardStyles = previewStyles();
   const classes = styles();
+  const dispatch = useDispatch();
 
   const onStartNewCardCreation = () => {
     setIsInProcess(true);
@@ -46,7 +51,14 @@ function CustomCard() {
 
     if (isValidationPassed) return;
 
-    console.log("validation passed", createdCardData);
+    const cardData: CardType = {
+      id: idGenerator(),
+      taste: createdCardData.taste,
+      servingsAmount: Number(createdCardData.servings),
+      selectedMsg: createdCardData.card_footer,
+    };
+
+    dispatch(addCard(cardData));
   };
 
   const fields: fieldsType[] = [

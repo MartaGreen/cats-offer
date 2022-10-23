@@ -25,8 +25,15 @@ const cardsSlice = createSlice({
       setStorageData("cards", state);
       return state;
     },
+
+    addCard: (state, action) => {
+      const newCardData: CardType = action.payload;
+      state.push(newCardData);
+      setStorageData("cards", state);
+      return state;
+    },
   },
 });
 
-export const { cardSelectionChange } = cardsSlice.actions;
+export const { cardSelectionChange, addCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

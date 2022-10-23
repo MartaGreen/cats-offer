@@ -1,8 +1,5 @@
 import { CardType } from "../types/card.type";
-
-const idGenerator = (): string => {
-  return `c_${Math.floor(Math.random() * 100)}`;
-};
+import idGenerator from "../shared/idGenerator";
 
 const CARDS_DEFAULT_DATA: CardType[] = [
   {
