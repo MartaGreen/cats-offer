@@ -6,8 +6,17 @@
 }
 
 body {
+  position: "relative";
   background-image: url("@images/background.png");
   padding: 36px 0;
+
+  max-width: 1200px;
+  min-width: 320px;
+  width: 100vw;
+}
+
+#app {
+  min-width: 300px;
 }
 
 input,

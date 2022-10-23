@@ -25,7 +25,7 @@ function Index() {
         </h1>
         <nav className={pagesClasses.header__nav}>
           <Link to="/cart" className={pagesClasses.header__link}>
-            Cart {cartStorage.length}
+            Cart ({cartStorage.length})
           </Link>
         </nav>
       </header>

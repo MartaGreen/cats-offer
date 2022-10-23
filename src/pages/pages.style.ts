@@ -3,7 +3,7 @@ import { createUseStyles } from "react-jss";
 export default createUseStyles({
   header: {
     position: "relative",
-    // margin: "0 0 50px 0",
+    width: "98%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -18,6 +18,12 @@ export default createUseStyles({
   header__link: {
     color: "#fff",
     textDecoration: "none",
+    fontSize: 20,
+    fontWeight: "bold",
+
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
 
   header__title: {
@@ -27,6 +33,6 @@ export default createUseStyles({
     lineHeight: "42px",
     fontWeight: 200,
 
-    margin: "30px 0",
+    margin: "40px 0 26px 0",
   },
 });
