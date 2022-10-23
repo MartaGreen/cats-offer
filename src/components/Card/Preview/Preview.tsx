@@ -3,9 +3,9 @@ import { WEIGHT_PER_SERVING } from "../../../constants/card.constant";
 import { CardType } from "../../../types/card.type";
 import styles from "./Preview.style";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItem, rmItem } from "../../../redux/slices/cart.slice";
-import { cardSelectionChange, rmCard } from "../../../redux/slices/cards.slice";
+import { cardSelectionChange } from "../../../redux/slices/cards.slice";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";

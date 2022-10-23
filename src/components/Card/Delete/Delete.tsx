@@ -14,7 +14,11 @@ function Delete({ data }: { data: CardType }) {
     dispatch(rmItem(data));
   };
 
-  return <div className={classes.preview__delete} onClick={onDeleteCard}></div>;
+  return (
+    <div className={classes.preview__deleteContainer} onClick={onDeleteCard}>
+      <div className={classes.preview__delete}></div>
+    </div>
+  );
 }
 
 export default Delete;

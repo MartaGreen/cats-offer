@@ -1,14 +1,39 @@
 import { createUseStyles } from "react-jss";
 
 export default createUseStyles({
-  preview__delete: {
+  preview__deleteContainer: {
     position: "absolute",
     top: 13,
     right: 13,
     width: 25,
     height: 25,
+
+    "&:hover": {
+      "& $preview__delete": {
+        transform: "translateX(-55px) rotate(-180deg)",
+      },
+      "&:after": {
+        content: "'delete'",
+        position: "absolute",
+        top: 0,
+        right: 0,
+        borderRadius: "0 20px 20px 0 ",
+        background: "gray",
+        color: "#fff",
+        padding: 5,
+      },
+    },
+  },
+  preview__delete: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 25,
+    height: 25,
     cursor: "pointer",
-    transition: "0.5s",
+    transition: "1s",
+    backgroundColor: "#fff",
+    borderRadius: "50%",
 
     "&:before, &:after": {
       position: "absolute",
@@ -27,14 +52,5 @@ export default createUseStyles({
     "&:before": {
       transform: "rotate(45deg)",
     },
-
-    // "&:hover:after": {
-    //   boxShadow: "10px -5px 1px grey",
-    //   transform: "rotate(-45deg) translateX(-10px)",
-    // },
-    // "&:hover:before": {
-    //   boxShadow: "10px -5px 1px grey",
-    //   transform: "rotate(45deg) translateX(-10px)",
-    // },
   },
 });
