@@ -6,6 +6,7 @@ import store from "../../redux";
 
 import Index from "../../pages/Index/Index";
 import Cart from "../../pages/Cart/Cart";
+import Admin from "../../pages/Admin/Admin";
 
 function App() {
   const classes = styles();
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </Provider>

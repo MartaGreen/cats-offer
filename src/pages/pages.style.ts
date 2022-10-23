@@ -11,8 +11,13 @@ export default createUseStyles({
 
   header__nav: {
     position: "absolute",
+    minWidth: 250,
     right: "5%",
     top: 0,
+
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   header__link: {

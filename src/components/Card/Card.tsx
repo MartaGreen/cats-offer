@@ -5,7 +5,7 @@ import Preview from "./Preview/Preview";
 import Footer from "./Footer/Footer";
 import Delete from "./Delete/Delete";
 
-function Card({ data }: { data: CardType }) {
+function Card({ data, isAdmin }: { data: CardType; isAdmin: boolean }) {
   const [isDisabled, setIsDisabled] = useState(data.isDisabled || false);
   const [isSelected, setIsSelected] = useState(data.isSelected || false);
 
@@ -29,7 +29,7 @@ function Card({ data }: { data: CardType }) {
         isDisabled={isDisabled}
         changeSelection={setIsSelected}
       />
-      <Delete data={cardData} />
+      {isAdmin && <Delete data={cardData} />}
     </div>
   );
 }
