@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { cardSelectionChange } from "../../../redux/slices/cards.slice";
+import { addItem } from "../../../redux/slices/cart.slice";
 import { CardType } from "../../../types/card.type";
 
 import styles from "./Footer.style";
@@ -15,9 +18,12 @@ function Footer({
   isDisabled: boolean;
 }) {
   const classes = styles();
+  const dispatch = useDispatch();
 
   const onSelectionChange = () => {
     changeSelection((selection: boolean) => !selection);
+    if (!isSelected) dispatch(addItem(data));
+    dispatch(cardSelectionChange(data));
   };
 
   const generateFooter = () => {
