@@ -39,6 +39,32 @@ export default createUseStyles({
     borderRadius: 10,
   },
 
+  preview__delete: {
+    position: "absolute",
+    top: 13,
+    right: 13,
+    width: 25,
+    height: 25,
+
+    "&:before, &:after": {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      content: "''",
+      width: "100%",
+      height: 3,
+      background: "gray",
+      display: "inline-block",
+      transformOrigin: "center",
+    },
+    "&:after": {
+      transform: "rotate(-45deg)",
+    },
+    "&:before": {
+      transform: "rotate(45deg)",
+    },
+  },
+
   preview__description: {
     height: 130,
     width: 228,

@@ -32,8 +32,17 @@ const cardsSlice = createSlice({
       setStorageData("cards", state);
       return state;
     },
+    rmCard: (state, action) => {
+      const deletedCard: CardType = action.payload;
+      const stateObject = current(state);
+      const updatedState = stateObject.filter(
+        (stateItem: CardType) => stateItem.id !== deletedCard.id
+      );
+      setStorageData("cards", updatedState);
+      return updatedState;
+    },
   },
 });
 
-export const { cardSelectionChange, addCard } = cardsSlice.actions;
+export const { cardSelectionChange, addCard, rmCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

@@ -18,14 +18,17 @@ export type fieldsType = {
   id: fieldsIdsType;
   placeholder: string;
 };
+const createdCardDefaultData = {
+  taste: "",
+  servings: "",
+  card_footer: "",
+};
 
 function CustomCard() {
   const [isInProcess, setIsInProcess] = useState(false);
-  const [createdCardData, setCreatedCardData] = useState({
-    taste: "",
-    servings: "",
-    card_footer: "",
-  } as createCardDataType);
+  const [createdCardData, setCreatedCardData] = useState(
+    createdCardDefaultData as createCardDataType
+  );
 
   const previewCardStyles = previewStyles();
   const classes = styles();
@@ -59,6 +62,8 @@ function CustomCard() {
     };
 
     dispatch(addCard(cardData));
+    setCreatedCardData(createdCardDefaultData);
+    setIsInProcess(false);
   };
 
   const fields: fieldsType[] = [
