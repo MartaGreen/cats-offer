@@ -20,7 +20,10 @@ const cardsSlice = createSlice({
     cardSelectionChange: (state, action) => {
       const selectedCard: CardType = action.payload;
       const stateObject: CardType[] = current(state);
-      const index: number = stateObject.indexOf(selectedCard);
+      const index: number = stateObject.findIndex(
+        (item) => item.id === selectedCard.id
+      );
+
       state[index].isSelected = !state[index].isSelected;
       setStorageData("cards", state);
       return state;

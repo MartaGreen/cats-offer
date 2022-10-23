@@ -1,9 +1,21 @@
 import React from "react";
 import { CardType } from "../../types/card.type";
 import styles from "./CartItem.style";
+import dustbinIcon from "../../../assets/images/dustbin.svg";
+import { useDispatch } from "react-redux";
+
+import { rmItem } from "../../redux/slices/cart.slice";
+import { cardSelectionChange } from "../../redux/slices/cards.slice";
 
 function CartItem({ item }: { item: CardType }) {
   const classes = styles();
+
+  const dispatch = useDispatch();
+
+  const onDeleteFromCart = () => {
+    dispatch(rmItem(item));
+    dispatch(cardSelectionChange(item));
+  };
 
   return (
     <tr key={item.id} className={classes.cart__item}>
@@ -26,6 +38,14 @@ function CartItem({ item }: { item: CardType }) {
         {item.selectedMsg} ({item.servingsAmount} serv.)
       </td>
       <td className={`${classes.item__td} ${classes.item__buy}`}>buy</td>
+      <td className={`${classes.item__td} ${classes.item__delete}`}>
+        <img
+          src={dustbinIcon}
+          alt="dustbin"
+          className={classes.item__dustbin}
+          onClick={onDeleteFromCart}
+        />
+      </td>
     </tr>
   );
 }

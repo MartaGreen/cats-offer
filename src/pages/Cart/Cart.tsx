@@ -25,10 +25,9 @@ function Cart() {
       </header>
       <table className={classes.cart}>
         <tbody>
-          {cartStore.map((item) => {
-            console.log(item);
-            return <CartItem item={item} key={item.id} />;
-          })}
+          {cartStore.map((item) => (
+            <CartItem item={item} key={item.id} />
+          ))}
         </tbody>
       </table>
     </>

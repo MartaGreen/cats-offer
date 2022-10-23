@@ -60,11 +60,27 @@ export default createUseStyles({
   item__buy: {
     backgroundColor: "none",
     borderLeft: "2px solid #000",
+    borderRight: "2px solid #000",
     color: "#000",
 
     "&:hover": {
       backgroundColor: "#000",
       color: "#fff",
+      cursor: "pointer",
+    },
+  },
+
+  item__delete: {
+    width: 30,
+    padding: "5px 10px",
+  },
+  item__dustbin: {
+    height: 17,
+    display: "inline-block",
+    transition: "0.3s",
+
+    "&:hover": {
+      transform: "scale(1.2)",
       cursor: "pointer",
     },
   },
