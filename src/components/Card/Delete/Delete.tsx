@@ -15,8 +15,9 @@ function Delete({ data }: { data: CardType }) {
   };
 
   return (
-    <div className={classes.preview__deleteContainer} onClick={onDeleteCard}>
-      <div className={classes.preview__delete}></div>
+    <div className={classes.preview__delete} onClick={onDeleteCard}>
+      <span className={classes.delete__text}>delete</span>
+      <div className={classes.delete__icon}></div>
     </div>
   );
 }
