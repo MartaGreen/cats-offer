@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Index.style";
-import CARDS_DEFAULT_DATA from "../../constants/card.constant";
 import { CardType } from "../../types/card.type";
 import StoreType from "../../types/store.type";
 
@@ -14,10 +13,6 @@ function Index() {
   const classes = styles();
   const cartStorage = useSelector((data: StoreType) => data.cart);
   const cardsStorage = useSelector((data: StoreType) => data.cards);
-
-  useEffect(() => {
-    console.log("cartStorage", cartStorage);
-  }, [cartStorage]);
 
   return (
     <>

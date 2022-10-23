@@ -1,8 +1,9 @@
 import React from "react";
+import styles from "./Delete.style";
 import { useDispatch } from "react-redux";
 import { rmCard } from "../../../redux/slices/cards.slice";
+import { rmItem } from "../../../redux/slices/cart.slice";
 import { CardType } from "../../../types/card.type";
-import styles from "./Delete.style";
 
 function Delete({ data }: { data: CardType }) {
   const classes = styles();
@@ -10,6 +11,7 @@ function Delete({ data }: { data: CardType }) {
 
   const onDeleteCard = () => {
     dispatch(rmCard(data));
+    dispatch(rmItem(data));
   };
 
   return <div className={classes.preview__delete} onClick={onDeleteCard}></div>;
