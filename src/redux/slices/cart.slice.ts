@@ -11,8 +11,8 @@ export const cartSlice = createSlice({
   initialState: getStorageData("cart"),
   reducers: {
     addItem: (state: CardType[], action: PayloadAction<CardType>) => {
-      updateCartStorage(state);
       state.push(action.payload);
+      updateCartStorage(state);
     },
     rmItem: (state: CardType[], action: PayloadAction<CardType>) => {
       const updatedState = state.filter(
