@@ -1,9 +1,27 @@
 import React, { useRef, useState } from "react";
 import previewStyles from "../Card/Preview/Preview.style";
 import styles from "./CustomCard.style";
+import DataField from "./DataField/DataField";
+
+export type createCardDataType = {
+  taste: string;
+  servings: string;
+  card_footer: string;
+};
+
+export type fieldsIdsType = "taste" | "servings" | "card_footer";
+export type fieldsType = {
+  id: fieldsIdsType;
+  placeholder: string;
+};
 
 function CustomCard() {
   const [isInProcess, setIsInProcess] = useState(false);
+  const [createdCardData, setCreatedCardData] = useState({
+    taste: "",
+    servings: "",
+    card_footer: "",
+  } as createCardDataType);
 
   const previewCardStyles = previewStyles();
   const classes = styles();
@@ -18,6 +36,33 @@ function CustomCard() {
   const onStopCreation = () => {
     setIsInProcess(false);
   };
+  const onCreateCard = () => {
+    const createdCardsFields: fieldsIdsType[] = Object(
+      Object.keys(createdCardData)
+    );
+    const isValidationPassed = createdCardsFields.some(
+      (field) => !createdCardData[field]
+    );
+
+    if (isValidationPassed) return;
+
+    console.log("validation passed", createdCardData);
+  };
+
+  const fields: fieldsType[] = [
+    {
+      id: "taste",
+      placeholder: "Feed taste",
+    },
+    {
+      id: "servings",
+      placeholder: "Amount of servings",
+    },
+    {
+      id: "card_footer",
+      placeholder: "Footer msg (when select)",
+    },
+  ];
 
   return (
     <div className={`${previewCardStyles.preview} ${classes.customCard}`}>
@@ -35,24 +80,14 @@ function CustomCard() {
           onSubmit={onFinishProcess}
         >
           <div className={classes.form__fields}>
-            <input
-              type="text"
-              id="taste"
-              placeholder="Feed taste"
-              className={`${classes.form__field}`}
-            />
-            <input
-              type="text"
-              id="servings"
-              placeholder="Amount of servings"
-              className={`${classes.form__field}`}
-            />
-            <input
-              type="text"
-              id="card_footer"
-              placeholder="Footer msg"
-              className={`${classes.form__field}`}
-            />
+            {fields.map((field) => (
+              <DataField
+                key={field.id}
+                setCreatedCardData={setCreatedCardData}
+                id={field.id}
+                placeholder={field.placeholder}
+              />
+            ))}
           </div>
 
           <div className={classes.form__btns}>
@@ -64,6 +99,7 @@ function CustomCard() {
             </button>
             <button
               className={`${classes.form__createBtn} ${classes.form__btn}`}
+              onClick={onCreateCard}
             >
               Create
             </button>
