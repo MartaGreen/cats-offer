@@ -32,6 +32,8 @@ function Preview({
     dispatch(cardSelectionChange(data));
   };
 
+  // tracking when to show hover caption after card selection
+  // (only if cursor leave a card)
   useEffect(() => {
     const preview: HTMLDivElement | null = previewContainer.current;
     if (!preview) return;

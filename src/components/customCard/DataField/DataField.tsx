@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { createCardDataType, fieldsIdsType } from "../CustomCard";
+import React from "react";
+import { newCardType, fieldsIdsType } from "../../../types/customCards.type";
 import styles from "./DataField.style";
 
 function DataField({
   id,
   placeholder,
-  setCreatedCardData,
+  updateNewCardData,
 }: {
   id: fieldsIdsType;
   placeholder: string;
-  setCreatedCardData: React.Dispatch<React.SetStateAction<createCardDataType>>;
+  updateNewCardData: React.Dispatch<React.SetStateAction<newCardType>>;
 }) {
   const classes = styles();
 
   const onFieldUpdated = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fieldData: string = e.target.value;
-    setCreatedCardData((state: createCardDataType) => {
+    updateNewCardData((state: newCardType) => {
       state[id] = fieldData;
       return { ...state };
     });

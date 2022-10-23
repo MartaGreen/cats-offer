@@ -1,85 +1,59 @@
-import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import idGenerator from "../../shared/idGenerator";
+import React, { useState } from "react";
 import previewStyles from "../Card/Preview/Preview.style";
 import styles from "./CustomCard.style";
-import DataField from "./DataField/DataField";
+import { useDispatch } from "react-redux";
+
+import idGenerator from "../../shared/idGenerator";
+import {
+  CUSTOM_CARD_FIELDS,
+  NEW_CARD_DEFAULT_DATA,
+} from "../../constants/customCard.constants";
 import { addCard } from "../../redux/slices/cards.slice";
 import { CardType } from "../../types/card.type";
+import { newCardType, fieldsIdsType } from "../../types/customCards.type";
 
-export type createCardDataType = {
-  taste: string;
-  servings: string;
-  card_footer: string;
-};
-
-export type fieldsIdsType = "taste" | "servings" | "card_footer";
-export type fieldsType = {
-  id: fieldsIdsType;
-  placeholder: string;
-};
-const createdCardDefaultData = {
-  taste: "",
-  servings: "",
-  card_footer: "",
-};
+import DataField from "./DataField/DataField";
 
 function CustomCard() {
   const [isInProcess, setIsInProcess] = useState(false);
-  const [createdCardData, setCreatedCardData] = useState(
-    createdCardDefaultData as createCardDataType
+  const [newCardData, setNewCardData] = useState(
+    NEW_CARD_DEFAULT_DATA as newCardType
   );
 
   const previewCardStyles = previewStyles();
   const classes = styles();
   const dispatch = useDispatch();
 
+  // creation process functions
   const onStartNewCardCreation = () => {
     setIsInProcess(true);
   };
-
-  const onFinishProcess = (e: React.FormEvent<HTMLFormElement>) => {
+  const onFinishCreation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const onStopCreation = () => {
+  const onCancelCreation = () => {
+    setNewCardData(NEW_CARD_DEFAULT_DATA);
     setIsInProcess(false);
   };
   const onCreateCard = () => {
     const createdCardsFields: fieldsIdsType[] = Object(
-      Object.keys(createdCardData)
+      Object.keys(newCardData)
     );
-    const isValidationPassed = createdCardsFields.some(
-      (field) => !createdCardData[field]
-    );
-
-    if (isValidationPassed) return;
+    // valid when all fields are filled
+    const isValid = createdCardsFields.some((field) => !!newCardData[field]);
+    if (!isValid) return;
 
     const cardData: CardType = {
       id: idGenerator(),
-      taste: createdCardData.taste,
-      servingsAmount: Number(createdCardData.servings),
-      selectedMsg: createdCardData.card_footer,
+      taste: newCardData.taste,
+      servingsAmount: Number(newCardData.servings),
+      selectedMsg: newCardData.card_footer,
     };
 
     dispatch(addCard(cardData));
-    setCreatedCardData(createdCardDefaultData);
-    setIsInProcess(false);
+    // reset
+    onCancelCreation();
   };
-
-  const fields: fieldsType[] = [
-    {
-      id: "taste",
-      placeholder: "Feed taste",
-    },
-    {
-      id: "servings",
-      placeholder: "Amount of servings",
-    },
-    {
-      id: "card_footer",
-      placeholder: "Footer msg (when select)",
-    },
-  ];
 
   return (
     <div className={`${previewCardStyles.preview} ${classes.customCard}`}>
@@ -94,13 +68,13 @@ function CustomCard() {
       )) || (
         <form
           className={`${previewCardStyles.preview__inner} ${classes.customCard__inner} ${classes.customCard__form}`}
-          onSubmit={onFinishProcess}
+          onSubmit={onFinishCreation}
         >
           <div className={classes.form__fields}>
-            {fields.map((field) => (
+            {CUSTOM_CARD_FIELDS.map((field) => (
               <DataField
                 key={field.id}
-                setCreatedCardData={setCreatedCardData}
+                updateNewCardData={setNewCardData}
                 id={field.id}
                 placeholder={field.placeholder}
               />
@@ -110,7 +84,7 @@ function CustomCard() {
           <div className={classes.form__btns}>
             <button
               className={`${classes.form__cancelBtn} ${classes.form__btn}`}
-              onClick={onStopCreation}
+              onClick={onCancelCreation}
             >
               Cancel
             </button>
