@@ -1,6 +1,10 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { CardType } from "../../types/card.type";
-import { getStorageData, setStorageData } from "../shared/storage";
+import {
+  getStorageData,
+  setStorageData,
+  updateStorage,
+} from "../shared/storage";
 
 const getCardsStorage = (): CardType[] => {
   const cardsStorage = getStorageData("cards");
@@ -19,14 +23,7 @@ const cardsSlice = createSlice({
   reducers: {
     cardSelectionChange: (state, action) => {
       const selectedCard: CardType = action.payload;
-      const stateObject: CardType[] = current(state);
-      const index: number = stateObject.findIndex(
-        (item) => item.id === selectedCard.id
-      );
-
-      state[index].isSelected = !state[index].isSelected;
-      setStorageData("cards", state);
-      return state;
+      return updateStorage(state, selectedCard, "isSelected", "cards");
     },
 
     addCard: (state, action) => {
@@ -47,14 +44,7 @@ const cardsSlice = createSlice({
 
     cardDisablingChange: (state, action) => {
       const selectedCard: CardType = action.payload;
-      const stateObject: CardType[] = current(state);
-      const index: number = stateObject.findIndex(
-        (item) => item.id === selectedCard.id
-      );
-
-      state[index].isDisabled = !state[index].isDisabled;
-      setStorageData("cards", state);
-      return state;
+      return updateStorage(state, selectedCard, "isDisabled", "cards");
     },
   },
 });

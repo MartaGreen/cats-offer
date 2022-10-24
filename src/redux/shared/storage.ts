@@ -12,3 +12,17 @@ export const getStorageData = (storageName: string): CardType[] => {
 export const setStorageData = (storageName: string, data: any) => {
   localStorage.setItem(storageName, JSON.stringify(data));
 };
+
+export const updateStorage = (
+  state: CardType[],
+  updatedCard: CardType,
+  updatedParam: "isSelected" | "isDisabled",
+  storageName: string
+) => {
+  const index: number = state.findIndex((item) => item.id === updatedCard.id);
+
+  state[index][updatedParam] = !state[index][updatedParam] || false;
+  setStorageData(storageName, state);
+
+  return state;
+};

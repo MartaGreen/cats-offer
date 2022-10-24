@@ -1,6 +1,10 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { CardType } from "../../types/card.type";
-import { getStorageData, setStorageData } from "../shared/storage";
+import {
+  getStorageData,
+  setStorageData,
+  updateStorage,
+} from "../shared/storage";
 
 const updateCartStorage = (data: CardType[]) => {
   setStorageData("cart", data);
@@ -24,14 +28,7 @@ export const cartSlice = createSlice({
 
     updateCart: (state, action) => {
       const selectedCard: CardType = action.payload;
-      const stateObject: CardType[] = current(state);
-      const index: number = stateObject.findIndex(
-        (item) => item.id === selectedCard.id
-      );
-
-      state[index].isDisabled = !state[index].isDisabled;
-      setStorageData("cart", state);
-      return state;
+      return updateStorage(state, selectedCard, "isDisabled", "cart");
     },
   },
 });
