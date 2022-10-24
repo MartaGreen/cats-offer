@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Index.style";
-import pagesStyle from "../pages.style";
 
 import { CardType } from "../../types/card.type";
 import StoreType from "../../types/store.type";

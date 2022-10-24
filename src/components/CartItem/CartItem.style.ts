@@ -11,7 +11,6 @@ export default createUseStyles({
 
   item_disabled: {
     position: "relative",
-    pointerEvents: "none",
 
     "&:before": {
       content: "''",
@@ -19,7 +18,7 @@ export default createUseStyles({
       left: 0,
       top: 0,
 
-      width: "100%",
+      width: "calc(100% - 38px)",
       height: "100%",
 
       backgroundColor: COLORS.disabled.main,
@@ -30,7 +29,7 @@ export default createUseStyles({
       position: "absolute",
       left: "50%",
       top: "50%",
-      transform: "transition(-50%, -50%)",
+      transform: "translate(-50%, -50%)",
       display: "inline-block",
       fontSize: 20,
       fontWeight: "bold",

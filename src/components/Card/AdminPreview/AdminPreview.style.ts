@@ -18,7 +18,29 @@ export default createUseStyles({
     opacity: 0,
 
     "&:checked ~ $disable__label": {
-      background: "red",
+      position: "relative",
+
+      "&:before, &:after": {
+        content: "''",
+        display: "inline-block",
+
+        position: "absolute",
+        bottom: "60%",
+        left: "10%",
+
+        width: "70%",
+        height: 3,
+        transformOrigin: "left center",
+        transform: "rotate(50deg)",
+        background: COLORS.selected.main,
+      },
+      "&:after": {
+        width: "100%",
+        transform: "rotate(-50deg)",
+
+        left: "50%",
+        bottom: "10%",
+      },
     },
   },
   disable__label: {
