@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss";
+import { COLORS } from "../../constants/styles.constants";
 
 export default createUseStyles({
   customCard: {
@@ -14,7 +15,7 @@ export default createUseStyles({
     position: "relative",
     width: 150,
     height: 150,
-    border: "4px solid #1698D9",
+    border: `4px solid ${COLORS.default.main}`,
     borderRadius: "50%",
 
     "&:after, &:before": {
@@ -26,7 +27,7 @@ export default createUseStyles({
       display: "inline-block",
       width: "70%",
       height: 7,
-      background: "#1698D9",
+      background: COLORS.default.main,
     },
     "&:before": {
       transform: "rotate(90deg) translate(-50%, 0)",
@@ -64,9 +65,9 @@ export default createUseStyles({
     cursor: "pointer",
   },
   form__cancelBtn: {
-    backgroundColor: "#D91667",
+    backgroundColor: COLORS.selected.main,
   },
   form__createBtn: {
-    backgroundColor: "#1698D9",
+    backgroundColor: COLORS.default.main,
   },
 });

@@ -1,12 +1,13 @@
 import { createUseStyles } from "react-jss";
 import catImg from "@images/cat.png";
+import { COLORS } from "../../../constants/styles.constants";
 
 export default createUseStyles({
   preview: {
     position: "relative",
     height: "92.3%",
 
-    background: "#1698D9",
+    background: COLORS.default.main,
 
     clipPath: "polygon(40px 0, 100% 0, 100% 100%, 0 100%, 0 40px)",
     borderRadius: 10,
@@ -16,7 +17,7 @@ export default createUseStyles({
 
     "&:hover": {
       cursor: "pointer",
-      background: "#2EA8E6",
+      background: COLORS.default.hover,
     },
   },
   preview__inner: {
@@ -82,7 +83,7 @@ export default createUseStyles({
     width: 80,
     height: 75,
 
-    background: "#1698D9",
+    background: COLORS.default.main,
     borderRadius: "50%",
     color: "#FFFFFF",
 
@@ -97,17 +98,17 @@ export default createUseStyles({
   },
 
   selected: {
-    background: "#D91667",
+    background: COLORS.selected.main,
 
     "& $description__weight": {
-      background: "#D91667",
+      background: COLORS.selected.main,
     },
 
     "&:hover": {
-      background: "#E52E7A",
+      background: COLORS.selected.hover,
 
       "& $description__weight": {
-        background: "#E52E7A",
+        background: COLORS.selected.hover,
       },
 
       "& $preview__description:before": {
@@ -119,10 +120,10 @@ export default createUseStyles({
 
   selected_hover: {
     "&:hover": {
-      background: "#D91667",
+      background: COLORS.selected.main,
 
       "& $description__weight": {
-        background: "#D91667",
+        background: COLORS.selected.main,
       },
 
       "& $preview__description:before": {
@@ -133,7 +134,7 @@ export default createUseStyles({
   },
 
   disabled: {
-    background: "#B3B3B3",
+    background: COLORS.disabled.main,
     pointerEvents: "none",
 
     "-webkit-touch-callout": "none" /* iOS Safari */,
@@ -144,7 +145,7 @@ export default createUseStyles({
     "user-select": "none",
 
     "& $description__weight": {
-      background: "#B3B3B3",
+      background: COLORS.disabled.main,
     },
     "& $preview__inner": {
       zIndex: 1000,

@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss";
+import { COLORS } from "../../../constants/styles.constants";
 
 export default createUseStyles({
   preview__delete: {
@@ -19,7 +20,7 @@ export default createUseStyles({
 
       "& $delete__icon": {
         transform: "translateX(-23px) rotate(-135deg)",
-        border: "2px solid #1698D9",
+        border: `2px solid ${COLORS.default.main}`,
       },
       "& $delete__text": {
         right: 0,
@@ -42,7 +43,7 @@ export default createUseStyles({
       content: "''",
       width: "100%",
       height: 3,
-      background: "#1698D9",
+      background: COLORS.default.main,
       display: "inline-block",
     },
     "&:before": {
@@ -61,7 +62,7 @@ export default createUseStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#1698D9",
+    backgroundColor: COLORS.default.main,
     color: "#fff",
     borderRadius: "0 20px 20px 0",
     padding: "7px 7px 7px 12px",
@@ -69,5 +70,19 @@ export default createUseStyles({
     textTransform: "uppercase",
     transform: "translateX(100%)",
     fontSize: 12,
+  },
+
+  "@media screen and (max-width: 768px)": {
+    preview__delete: {
+      width: 80,
+    },
+    delete__icon: {
+      transform: "translateX(-23px) rotate(-135deg)",
+      border: `2px solid ${COLORS.default.main}`,
+    },
+    delete__text: {
+      right: 0,
+      transform: "translateX(0)",
+    },
   },
 });

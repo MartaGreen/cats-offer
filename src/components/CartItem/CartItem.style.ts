@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss";
+import { COLORS } from "../../constants/styles.constants";
 
 export default createUseStyles({
   cart__item: {
@@ -37,7 +38,7 @@ export default createUseStyles({
         height: 3,
         transformOrigin: "left center",
         transform: "rotate(50deg)",
-        background: "#D91667",
+        background: COLORS.selected.main,
       },
       "&:after": {
         width: "100%",

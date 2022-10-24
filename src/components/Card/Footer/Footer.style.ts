@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss";
+import { COLORS } from "../../../constants/styles.constants";
 
 export default createUseStyles({
   footer: {
@@ -14,7 +15,7 @@ export default createUseStyles({
   footer__buyLink: {
     textDecoration: "underline",
     textDecorationStyle: "dotted",
-    color: "#1698D9",
+    color: COLORS.default.main,
   },
 
   footer_disabled: {
