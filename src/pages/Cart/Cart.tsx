@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Cart.style";
-import pagesStyle from "../pages.style";
 
 import { useSelector } from "react-redux";
 import StoreType from "../../types/store.type";

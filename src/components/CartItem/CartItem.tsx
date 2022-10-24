@@ -18,7 +18,12 @@ function CartItem({ item }: { item: CardType }) {
   };
 
   return (
-    <tr key={item.id} className={classes.cart__item}>
+    <tr
+      key={item.id}
+      className={`${classes.cart__item} ${
+        item.isDisabled && classes.item_disabled
+      }`}
+    >
       <td className={classes.item__td} style={{ padding: 0, paddingLeft: 15 }}>
         <input
           type="checkbox"

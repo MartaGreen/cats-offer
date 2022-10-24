@@ -9,6 +9,35 @@ export default createUseStyles({
     fontSize: 14,
   },
 
+  item_disabled: {
+    position: "relative",
+    pointerEvents: "none",
+
+    "&:before": {
+      content: "''",
+      position: "absolute",
+      left: 0,
+      top: 0,
+
+      width: "100%",
+      height: "100%",
+
+      backgroundColor: COLORS.disabled.main,
+      opacity: "85%",
+    },
+    "&:after": {
+      content: "'out of stock'",
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "transition(-50%, -50%)",
+      display: "inline-block",
+      fontSize: 20,
+      fontWeight: "bold",
+      color: COLORS.selected.main,
+    },
+  },
+
   item__td: {
     borderBottom: "1px solid #000",
     textAlign: "center",

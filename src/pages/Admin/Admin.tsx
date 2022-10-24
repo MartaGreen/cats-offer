@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./Admin.style";
-import pagesStyle from "../pages.style";
 
-import { Link } from "react-router-dom";
 import { CardType } from "../../types/card.type";
 import { useSelector } from "react-redux";
 import StoreType from "../../types/store.type";

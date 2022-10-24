@@ -44,8 +44,21 @@ const cardsSlice = createSlice({
       setStorageData("cards", updatedState);
       return updatedState;
     },
+
+    cardDisablingChange: (state, action) => {
+      const selectedCard: CardType = action.payload;
+      const stateObject: CardType[] = current(state);
+      const index: number = stateObject.findIndex(
+        (item) => item.id === selectedCard.id
+      );
+
+      state[index].isDisabled = !state[index].isDisabled;
+      setStorageData("cards", state);
+      return state;
+    },
   },
 });
 
-export const { cardSelectionChange, addCard, rmCard } = cardsSlice.actions;
+export const { cardSelectionChange, addCard, rmCard, cardDisablingChange } =
+  cardsSlice.actions;
 export default cardsSlice.reducer;

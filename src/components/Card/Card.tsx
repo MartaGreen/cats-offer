@@ -18,7 +18,13 @@ function Card({ data, isAdmin }: { data: CardType; isAdmin: boolean }) {
 
   return (
     <div style={{ height: 510, position: "relative" }}>
-      {(isAdmin && <AdminPreview data={data} isDisabled={isDisabled} />) || (
+      {(isAdmin && (
+        <AdminPreview
+          data={data}
+          isDisabled={isDisabled}
+          changeDisabling={setIsDisabled}
+        />
+      )) || (
         <Preview
           data={cardData}
           isSelected={isSelected}
@@ -28,8 +34,8 @@ function Card({ data, isAdmin }: { data: CardType; isAdmin: boolean }) {
       )}
       <Footer
         data={cardData}
-        isSelected={isSelected}
-        isDisabled={isDisabled}
+        isSelected={isAdmin || isSelected}
+        isDisabled={isAdmin ? false : isDisabled}
         changeSelection={setIsSelected}
       />
       {isAdmin && <Delete data={cardData} />}
