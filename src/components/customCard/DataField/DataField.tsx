@@ -6,10 +6,12 @@ function DataField({
   id,
   placeholder,
   updateNewCardData,
+  defaultValue,
 }: {
   id: fieldsIdsType;
   placeholder: string;
   updateNewCardData: React.Dispatch<React.SetStateAction<newCardType>>;
+  defaultValue?: string;
 }) {
   const classes = styles();
 
@@ -27,6 +29,7 @@ function DataField({
       id={id}
       placeholder={placeholder}
       className={`${classes.form__field}`}
+      value={defaultValue}
       onChange={onFieldUpdated}
     />
   );

@@ -28,7 +28,9 @@ const cardsSlice = createSlice({
 
     addCard: (state, action) => {
       const newCardData: CardType = action.payload;
+      const index = state.findIndex((card) => card.id === newCardData.id);
       state.push(newCardData);
+
       setStorageData("cards", state);
       return state;
     },
