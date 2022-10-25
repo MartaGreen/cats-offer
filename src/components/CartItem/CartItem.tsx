@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { CardType } from "../../types/card.type";
 import styles from "./CartItem.style";
-import dustbinIcon from "../../../assets/images/dustbin.svg";
-import { useDispatch } from "react-redux";
 
+import dustbinIcon from "../../../assets/images/dustbin.svg";
+import { CardType } from "../../types/card.type";
+import { useDispatch } from "react-redux";
 import { rmItem } from "../../redux/slices/cart.slice";
 import { cardSelectionChange } from "../../redux/slices/cards.slice";
 

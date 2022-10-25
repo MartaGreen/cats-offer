@@ -5,7 +5,7 @@ import CustomCardStyle from "../CustomCard.style";
 
 import idGenerator from "../../../shared/idGenerator";
 import { useDispatch } from "react-redux";
-import { addCard } from "../../../redux/slices/cards.slice";
+import { addCard, editCard } from "../../../redux/slices/cards.slice";
 
 import {
   CUSTOM_CARD_FIELDS,
@@ -20,9 +20,11 @@ import DataField from "../DataField/DataField";
 function CreateCardForm({
   changeProcessState,
   defaultData,
+  mode,
 }: {
   changeProcessState: React.Dispatch<React.SetStateAction<boolean>>;
   defaultData?: CardType;
+  mode: "create" | "edit";
 }) {
   const [isDisabled, setIsDisabled] = useState(!!defaultData?.isDisabled);
   const [newCardData, setNewCardData] = useState(
@@ -34,7 +36,7 @@ function CreateCardForm({
   const customCardClasses = CustomCardStyle();
   const dispatch = useDispatch();
 
-  const onFinishCreation = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubminCreation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
   const onCancelCreation = () => {
@@ -50,14 +52,16 @@ function CreateCardForm({
     if (!isValid) return;
 
     const cardData: CardType = {
-      id: idGenerator(),
+      id: defaultData?.id || idGenerator(),
       taste: newCardData.taste,
       servingsAmount: Number(newCardData.servings),
       selectedMsg: newCardData.card_footer,
       isDisabled: isDisabled,
     };
 
-    dispatch(addCard(cardData));
+    if (mode === "edit") dispatch(editCard(cardData));
+    if (mode == "create") dispatch(addCard(cardData));
+
     // reset
     onCancelCreation();
   };
@@ -69,7 +73,7 @@ function CreateCardForm({
   return (
     <form
       className={`${previewCardClasses.preview__inner} ${classes.customCard__form} ${customCardClasses.customCard__inner}`}
-      onSubmit={onFinishCreation}
+      onSubmit={onSubminCreation}
     >
       <div className={classes.form__fields}>
         {CUSTOM_CARD_FIELDS.map((field) => (

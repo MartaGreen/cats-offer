@@ -22,7 +22,7 @@ function Card({ data, isAdmin }: { data: CardType; isAdmin: boolean }) {
         <AdminPreview
           data={data}
           isDisabled={isDisabled}
-          changeDisabling={setIsDisabled}
+          changeDisablement={setIsDisabled}
         />
       )) || (
         <Preview

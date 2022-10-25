@@ -4,9 +4,9 @@ import adminStyles from "./AdminPreview.style";
 
 import { useDispatch } from "react-redux";
 import { WEIGHT_PER_SERVING } from "../../../constants/card.constant";
-import { CardType } from "../../../types/card.type";
-import { cardDisablingChange } from "../../../redux/slices/cards.slice";
+import { cardDisablementChange } from "../../../redux/slices/cards.slice";
 import { updateCart } from "../../../redux/slices/cart.slice";
+import { CardType } from "../../../types/card.type";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
@@ -16,11 +16,11 @@ import CreateCardForm from "../../customCard/CreateCardForm/CreateCardForm";
 function AdminPreview({
   data,
   isDisabled,
-  changeDisabling,
+  changeDisablement,
 }: {
   data: CardType;
   isDisabled: boolean;
-  changeDisabling: React.Dispatch<React.SetStateAction<boolean>>;
+  changeDisablement: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [isEditProcess, setIsEditProcess] = useState(false);
 
@@ -34,9 +34,9 @@ function AdminPreview({
   const mousesAmount = Math.ceil(data.servingsAmount / 20);
   const mouseWordForms = { singular: "mice", plural: "mouses" };
 
-  const onDisableChange = (): void => {
-    changeDisabling((state) => !state);
-    dispatch(cardDisablingChange(data));
+  const onDisablementChange = (): void => {
+    changeDisablement((state) => !state);
+    dispatch(cardDisablementChange(data));
     dispatch(updateCart(data));
   };
 
@@ -58,7 +58,7 @@ function AdminPreview({
               <Checkbox
                 id={data.id}
                 isChecked={isDisabled}
-                changeChecking={onDisableChange}
+                changeChecking={onDisablementChange}
                 extraStyleClasses={adminClasses.disable__label}
               />
             </div>
@@ -82,6 +82,7 @@ function AdminPreview({
         <CreateCardForm
           changeProcessState={setIsEditProcess}
           defaultData={data}
+          mode="edit"
         />
       )}
     </div>

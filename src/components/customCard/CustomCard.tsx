@@ -30,6 +30,7 @@ function CustomCard({ defaultData }: { defaultData?: CardType }) {
         <CreateCardForm
           defaultData={defaultData}
           changeProcessState={setIsInProcess}
+          mode="create"
         />
       )}
     </div>
