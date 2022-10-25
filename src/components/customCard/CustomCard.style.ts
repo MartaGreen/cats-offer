@@ -37,6 +37,17 @@ export default createUseStyles({
 
   customCard__form: {},
 
+  form__disableField: {
+    width: 90,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  disableField__text: {
+    color: COLORS.default.main,
+    fontWeight: "bold",
+  },
+
   form__fields: {},
   form__field: {
     width: "100%",

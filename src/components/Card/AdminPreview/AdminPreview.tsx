@@ -10,6 +10,7 @@ import { updateCart } from "../../../redux/slices/cart.slice";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
+import Checkbox from "../../Checkbox/Checkbox";
 
 function AdminPreview({
   data,
@@ -30,7 +31,7 @@ function AdminPreview({
   const mousesAmount = Math.ceil(data.servingsAmount / 20);
   const mouseWordForms = { singular: "mice", plural: "mouses" };
 
-  const onDisableChange = () => {
+  const onDisableChange = (): void => {
     changeDisabling((state) => !state);
     dispatch(cardDisablingChange(data));
     dispatch(updateCart(data));
@@ -46,18 +47,12 @@ function AdminPreview({
           <div className={adminClasses.disable}>
             <span className={adminClasses.disable__text}>disable:</span>
 
-            <input
-              type="checkbox"
-              name="isDisabled"
-              id={`disableCard_${data.id}`}
-              checked={isDisabled}
-              onChange={onDisableChange}
-              className={adminClasses.disable__input}
+            <Checkbox
+              id={data.id}
+              isChecked={isDisabled}
+              changeChecking={onDisableChange}
+              extraStyleClasses={adminClasses.disable__label}
             />
-            <label
-              htmlFor={`disableCard_${data.id}`}
-              className={adminClasses.disable__label}
-            ></label>
           </div>
 
           <ServingsOffer

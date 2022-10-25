@@ -1,3 +1,4 @@
+import { current } from "@reduxjs/toolkit";
 import CARDS_DEFAULT_DATA from "../../constants/card.constant";
 import { CardType } from "../../types/card.type";
 
@@ -21,7 +22,7 @@ export const updateStorage = (
 ) => {
   const index: number = state.findIndex((item) => item.id === updatedCard.id);
 
-  state[index][updatedParam] = !state[index][updatedParam] || false;
+  state[index][updatedParam] = !state[index][updatedParam];
   setStorageData(storageName, state);
 
   return state;

@@ -14,35 +14,6 @@ export default createUseStyles({
     alignItems: "center",
   },
 
-  disable__input: {
-    opacity: 0,
-
-    "&:checked ~ $disable__label": {
-      position: "relative",
-
-      "&:before, &:after": {
-        content: "''",
-        display: "inline-block",
-
-        position: "absolute",
-        bottom: "60%",
-        left: "10%",
-
-        width: "70%",
-        height: 3,
-        transformOrigin: "left center",
-        transform: "rotate(50deg)",
-        background: COLORS.selected.main,
-      },
-      "&:after": {
-        width: "100%",
-        transform: "rotate(-50deg)",
-
-        left: "50%",
-        bottom: "10%",
-      },
-    },
-  },
   disable__label: {
     width: 20,
     height: 20,

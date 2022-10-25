@@ -13,9 +13,11 @@ import { CardType } from "../../types/card.type";
 import { newCardType, fieldsIdsType } from "../../types/customCards.type";
 
 import DataField from "./DataField/DataField";
+import Checkbox from "../Checkbox/Checkbox";
 
 function CustomCard() {
   const [isInProcess, setIsInProcess] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [newCardData, setNewCardData] = useState(
     NEW_CARD_DEFAULT_DATA as newCardType
   );
@@ -48,11 +50,16 @@ function CustomCard() {
       taste: newCardData.taste,
       servingsAmount: Number(newCardData.servings),
       selectedMsg: newCardData.card_footer,
+      isDisabled: isDisabled,
     };
 
     dispatch(addCard(cardData));
     // reset
     onCancelCreation();
+  };
+
+  const changeIsChecked = () => {
+    setIsDisabled((state) => !state);
   };
 
   return (
@@ -79,6 +86,16 @@ function CustomCard() {
                 placeholder={field.placeholder}
               />
             ))}
+
+            <div className={classes.form__disableField}>
+              <span className={classes.disableField__text}>Disable: </span>
+
+              <Checkbox
+                isChecked={isDisabled}
+                changeChecking={changeIsChecked}
+                id={idGenerator()}
+              />
+            </div>
           </div>
 
           <div className={classes.form__btns}>
