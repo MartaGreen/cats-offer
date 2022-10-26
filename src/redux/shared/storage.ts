@@ -17,13 +17,22 @@ export const setStorageData = (storageName: string, data: any) => {
 export const updateStorage = (
   state: CardType[],
   updatedCard: CardType,
-  updatedParam: "isSelected" | "isDisabled",
-  storageName: string
+  storageName: string,
+  selection: boolean | undefined,
+  disablement: boolean | undefined
 ) => {
-  const index: number = state.findIndex((item) => item.id === updatedCard.id);
+  const clonedState = new Array(...current(state));
+  const index: number = clonedState.findIndex(
+    (item) => item.id === updatedCard.id
+  );
 
-  state[index][updatedParam] = !state[index][updatedParam];
-  setStorageData(storageName, state);
+  const card = {
+    ...clonedState[index],
+    isSelected: selection,
+    isDisabled: disablement,
+  };
+  clonedState[index] = card;
+  setStorageData(storageName, clonedState);
 
-  return state;
+  return clonedState;
 };

@@ -12,10 +12,6 @@ function Card({ data, isAdmin }: { data: CardType; isAdmin: boolean }) {
 
   const cardData = useMemo(() => data, [data]);
 
-  useEffect(() => {
-    console.log(data.id);
-  }, [data]);
-
   return (
     <div style={{ height: 510, position: "relative" }}>
       {(isAdmin && (

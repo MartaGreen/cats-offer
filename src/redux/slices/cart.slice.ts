@@ -15,12 +15,17 @@ export const cartSlice = createSlice({
   initialState: getStorageData("cart"),
   reducers: {
     addItem: (state: CardType[], action: PayloadAction<CardType>) => {
-      state.push(action.payload);
-      updateCartStorage(state);
+      const newItem: CardType = action.payload;
+      const updatedState = [...state, newItem];
+      updateCartStorage(updatedState);
+      return updatedState;
     },
     rmItem: (state: CardType[], action: PayloadAction<CardType>) => {
-      const updatedState = state.filter(
-        (item: CardType) => item.id !== action.payload.id
+      const selectedCard = action.payload;
+      const clonedState = [...state];
+
+      const updatedState = clonedState.filter(
+        (item: CardType) => item.id !== selectedCard.id
       );
       updateCartStorage(updatedState);
       return updatedState;
@@ -28,7 +33,13 @@ export const cartSlice = createSlice({
 
     updateCart: (state, action) => {
       const selectedCard: CardType = action.payload;
-      return updateStorage(state, selectedCard, "isDisabled", "cart");
+      return updateStorage(
+        state,
+        selectedCard,
+        "cart",
+        selectedCard.isSelected,
+        selectedCard.isDisabled
+      );
     },
   },
 });

@@ -6,13 +6,17 @@ import {
   updateStorage,
 } from "../shared/storage";
 
+const setCardsStorage = (updatedState: CardType[]) => {
+  setStorageData("cards", updatedState);
+};
+
 const getCardsStorage = (): CardType[] => {
   const cardsStorage = getStorageData("cards");
 
   const selectedCards = cardsStorage.filter(
     (card: CardType) => card.isSelected
   );
-  setStorageData("cart", selectedCards);
+  setCardsStorage(selectedCards);
 
   return cardsStorage;
 };
@@ -23,35 +27,48 @@ const cardsSlice = createSlice({
   reducers: {
     addCard: (state, action) => {
       const newCardData: CardType = action.payload;
-      // const index = state.findIndex((card) => card.id === newCardData.id);
-      state.push(newCardData);
+      const updatedState: CardType[] = [...state, newCardData];
 
-      setStorageData("cards", state);
-      return state;
+      setCardsStorage(updatedState);
+      return updatedState;
     },
     rmCard: (state, action) => {
       const deletedCard: CardType = action.payload;
-      const updatedState = state.filter(
+      const clonedState = [...state];
+      const updatedState = clonedState.filter(
         (stateItem: CardType) => stateItem.id !== deletedCard.id
       );
-      setStorageData("cards", updatedState);
+      setCardsStorage(updatedState);
       return updatedState;
     },
 
     cardSelectionChange: (state, action) => {
       const selectedCard: CardType = action.payload;
-      return updateStorage(state, selectedCard, "isSelected", "cards");
+      return updateStorage(
+        state,
+        selectedCard,
+        "cards",
+        !selectedCard.isSelected,
+        selectedCard.isDisabled
+      );
     },
     cardDisablementChange: (state, action) => {
       const selectedCard: CardType = action.payload;
-      return updateStorage(state, selectedCard, "isDisabled", "cards");
+      return updateStorage(
+        state,
+        selectedCard,
+        "cards",
+        selectedCard.isSelected,
+        !selectedCard.isDisabled
+      );
     },
 
     editCard: (state, action) => {
       const editedCard: CardType = action.payload;
-      const index = state.findIndex((item) => item.id === editedCard.id);
-      state[index] = editedCard;
-      return state;
+      const clonedState: CardType[] = [...state];
+      const index = clonedState.findIndex((item) => item.id === editedCard.id);
+      clonedState[index] = editedCard;
+      return clonedState;
     },
   },
 });
