@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { CardType } from "../../types/card.type";
 import {
   getStorageData,
@@ -9,6 +9,9 @@ import {
 const setCardsStorage = (updatedState: CardType[]) => {
   setStorageData("cards", updatedState);
 };
+const setCartStorage = (updatedState: CardType[]) => {
+  setStorageData("cart", updatedState);
+};
 
 const getCardsStorage = (): CardType[] => {
   const cardsStorage = getStorageData("cards");
@@ -16,7 +19,7 @@ const getCardsStorage = (): CardType[] => {
   const selectedCards = cardsStorage.filter(
     (card: CardType) => card.isSelected
   );
-  setCardsStorage(selectedCards);
+  setCartStorage(selectedCards);
 
   return cardsStorage;
 };
@@ -68,6 +71,8 @@ const cardsSlice = createSlice({
       const clonedState: CardType[] = [...state];
       const index = clonedState.findIndex((item) => item.id === editedCard.id);
       clonedState[index] = editedCard;
+
+      console.log(clonedState);
       return clonedState;
     },
   },

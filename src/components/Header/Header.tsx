@@ -34,7 +34,7 @@ function Header({ title }: { title: string }) {
       <h1 className={classes.header__title}>{title}</h1>
       <nav className={classes.header__nav}>
         {pages.map((page) => (
-          <PageLink to={page.path} name={page.name} />
+          <PageLink to={page.path} name={page.name} key={page.name} />
         ))}
       </nav>
     </header>

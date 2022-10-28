@@ -10,9 +10,8 @@ export const getStorageData = (storageName: string): CardType[] => {
   return CARDS_DEFAULT_DATA;
 };
 
-export const setStorageData = (storageName: string, data: any) => {
+export const setStorageData = (storageName: string, data: any) =>
   localStorage.setItem(storageName, JSON.stringify(data));
-};
 
 export const updateStorage = (
   state: CardType[],

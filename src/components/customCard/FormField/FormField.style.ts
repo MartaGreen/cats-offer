@@ -8,4 +8,7 @@ export default createUseStyles({
     padding: "5px 10px",
     fontSize: 17,
   },
+  form__field_notValid: {
+    borderBottom: "2px solid red",
+  },
 });

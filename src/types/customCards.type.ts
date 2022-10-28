@@ -1,11 +1,11 @@
-export type newCardType = {
-  taste: string;
-  servings: string;
-  card_footer: string;
-};
+import { CardType } from "./card.type";
 
-export type fieldsIdsType = "taste" | "servings" | "card_footer";
-export type fieldType = {
-  id: fieldsIdsType;
+export type CreationFormIdsType = keyof CardType;
+export type CreationFieldType = {
+  value: string;
   placeholder: string;
+  type: "checkbox" | "text";
+};
+export type CreationFormType = {
+  [key in CreationFormIdsType]?: CreationFieldType;
 };

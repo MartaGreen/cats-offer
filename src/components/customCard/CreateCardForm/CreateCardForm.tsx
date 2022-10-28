@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CreateCardForm.style";
 import previewCardStyles from "../../Card/Preview/Preview.style";
 import CustomCardStyle from "../CustomCard.style";
@@ -7,15 +7,17 @@ import idGenerator from "../../../shared/idGenerator";
 import { useDispatch } from "react-redux";
 import { addCard, editCard } from "../../../redux/slices/cards.slice";
 
+import { Form } from "react-final-form";
+
+import { CARD_CREATION_FIELDS } from "../../../constants/customCard.constants";
 import {
-  CUSTOM_CARD_FIELDS,
-  NEW_CARD_DEFAULT_DATA,
-} from "../../../constants/customCard.constants";
-import { fieldsIdsType, newCardType } from "../../../types/customCards.type";
+  CreationFormIdsType,
+  CreationFieldType,
+} from "../../../types/customCards.type";
 import { CardType } from "../../../types/card.type";
 
 import Checkbox from "../../Checkbox/Checkbox";
-import DataField from "../DataField/DataField";
+import FormField from "../FormField/FormField";
 
 function CreateCardForm({
   changeProcessState,
@@ -26,91 +28,123 @@ function CreateCardForm({
   defaultData?: CardType;
   mode: "create" | "edit";
 }) {
-  const [isDisabled, setIsDisabled] = useState(!!defaultData?.isDisabled);
-  const [newCardData, setNewCardData] = useState(
-    NEW_CARD_DEFAULT_DATA as newCardType
-  );
-
   const classes = styles();
   const previewCardClasses = previewCardStyles();
   const customCardClasses = CustomCardStyle();
   const dispatch = useDispatch();
 
-  const onSubminCreation = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-  const onCancelCreation = () => {
-    setNewCardData(NEW_CARD_DEFAULT_DATA);
-    changeProcessState(false);
-  };
-  const onCreateCard = () => {
-    const createdCardsFields: fieldsIdsType[] = Object(
-      Object.keys(newCardData)
-    );
-    // valid when all fields are filled
-    const isValid = createdCardsFields.some((field) => !!newCardData[field]);
-    if (!isValid) return;
+  const [formFields, setFormFields] = useState(() => {
+    if (!defaultData) return CARD_CREATION_FIELDS;
 
-    const cardData: CardType = {
+    const defaultFields = { ...CARD_CREATION_FIELDS };
+    const fieldsNames = Object.keys(
+      defaultFields
+    ) as Array<CreationFormIdsType>;
+
+    fieldsNames.forEach((name: CreationFormIdsType) => {
+      const fieldData = defaultFields[name];
+      if (!fieldData) return;
+
+      fieldData.value = defaultData[name]?.toString() || "";
+    });
+
+    return defaultFields;
+  });
+
+  const fieldValidation = (value: CreationFieldType | undefined) =>
+    !value?.value;
+
+  const changeDisablement = () => {
+    setFormFields((state) => {
+      const disablementField = { ...state.isDisabled };
+      const value: boolean = Boolean(disablementField?.value);
+      disablementField.value = value.toString();
+
+      return { ...state, ...disablementField };
+    });
+  };
+
+  const onCancelCreation = (form: any) => {
+    changeProcessState(false);
+    form.reset();
+  };
+  const onSubmitCreation = () => {
+    const newCard: CardType = {
       id: defaultData?.id || idGenerator(),
-      taste: newCardData.taste,
-      servingsAmount: Number(newCardData.servings),
-      selectedMsg: newCardData.card_footer,
-      isDisabled: isDisabled,
+      taste: formFields.taste?.value || "",
+      servingsAmount: Number(formFields.servingsAmount?.value) || 0,
+      selectedMsg: formFields.selectedMsg?.value || "",
+      isSelected: Boolean(formFields.isSelected?.value),
+      isDisabled: Boolean(formFields.isDisabled?.value),
     };
 
-    if (mode === "edit") dispatch(editCard(cardData));
-    if (mode == "create") dispatch(addCard(cardData));
+    if (mode === "edit") dispatch(editCard(newCard));
+    if (mode === "create") dispatch(addCard(newCard));
 
-    // reset
-    onCancelCreation();
-  };
-
-  const changeIsChecked = () => {
-    setIsDisabled((state) => !state);
+    changeProcessState(false);
   };
 
   return (
-    <form
-      className={`${previewCardClasses.preview__inner} ${classes.customCard__form} ${customCardClasses.customCard__inner}`}
-      onSubmit={onSubminCreation}
-    >
-      <div className={classes.form__fields}>
-        {CUSTOM_CARD_FIELDS.map((field) => (
-          <DataField
-            key={field.id}
-            updateNewCardData={setNewCardData}
-            id={field.id}
-            placeholder={field.placeholder}
-          />
-        ))}
-
-        <div className={classes.form__disableField}>
-          <span className={classes.disableField__text}>Disable: </span>
-
-          <Checkbox
-            isChecked={isDisabled}
-            changeChecking={changeIsChecked}
-            id={idGenerator()}
-          />
-        </div>
-      </div>
-
-      <div className={classes.form__btns}>
-        <button
-          className={`${classes.form__cancelBtn} ${classes.form__btn}`}
-          onClick={onCancelCreation}
+    <Form
+      onSubmit={onSubmitCreation}
+      initialValues={formFields}
+      render={({ handleSubmit, form }) => (
+        <form
+          onSubmit={handleSubmit}
+          className={`${previewCardClasses.preview__inner} ${classes.customCard__form} ${customCardClasses.customCard__inner}`}
         >
-          Cancel
-        </button>
-        <button
-          className={`${classes.form__createBtn} ${classes.form__btn}`}
-          onClick={onCreateCard}
-        >
-          Create
-        </button>
-      </div>
-    </form>
+          <div>
+            {(Object.keys(formFields) as Array<CreationFormIdsType>).map(
+              (field: CreationFormIdsType) => {
+                const fieldData: CreationFieldType | undefined =
+                  formFields[field];
+                return (
+                  (fieldData?.type === "text" && (
+                    <FormField
+                      name={field}
+                      data={fieldData}
+                      changeValue={setFormFields}
+                      key={field}
+                      validate={fieldValidation}
+                    />
+                  )) ||
+                  (fieldData?.type === "checkbox" && (
+                    <div className={classes.form__disableField} key={field}>
+                      <span className={classes.disableField__text}>
+                        Disable:{" "}
+                      </span>
+
+                      <Checkbox
+                        isChecked={Boolean(fieldData?.value)}
+                        changeChecking={changeDisablement}
+                        id={idGenerator()}
+                      />
+                    </div>
+                  ))
+                );
+              }
+            )}
+          </div>
+
+          <div className={classes.form__btns}>
+            <button
+              className={`${classes.form__cancelBtn} ${classes.form__btn}`}
+              onClick={() => onCancelCreation(form)}
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              className={`${classes.form__createBtn} ${classes.form__btn}`}
+              type="submit"
+            >
+              {mode === "create" && "Create"}
+              {mode === "edit" && "Edit"}
+            </button>
+          </div>
+        </form>
+      )}
+    ></Form>
   );
 }
 

@@ -63,7 +63,9 @@ function AdminPreview({
               />
             </div>
 
-            <div onClick={onEditCard}>edit</div>
+            <div onClick={onEditCard} className={adminClasses.edit}>
+              edit card
+            </div>
 
             <ServingsOffer
               amount={data.servingsAmount}

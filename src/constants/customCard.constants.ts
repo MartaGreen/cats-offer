@@ -1,22 +1,24 @@
-import { fieldType } from "../types/customCards.type";
+import { CreationFormType } from "../types/customCards.type";
 
-export const CUSTOM_CARD_FIELDS: fieldType[] = [
-  {
-    id: "taste",
+export const CARD_CREATION_FIELDS: CreationFormType = {
+  taste: {
+    value: "",
     placeholder: "Feed taste",
+    type: "text",
   },
-  {
-    id: "servings",
+  servingsAmount: {
+    value: "",
     placeholder: "Amount of servings",
+    type: "text",
   },
-  {
-    id: "card_footer",
-    placeholder: "Footer msg (when select)",
+  selectedMsg: {
+    value: "",
+    placeholder: "Footer msg (when select card)",
+    type: "text",
   },
-];
-
-export const NEW_CARD_DEFAULT_DATA = {
-  taste: "",
-  servings: "",
-  card_footer: "",
+  isDisabled: {
+    value: "",
+    placeholder: "Disable",
+    type: "checkbox",
+  },
 };
