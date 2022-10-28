@@ -12,28 +12,23 @@ export default createUseStyles({
   item_disabled: {
     position: "relative",
 
-    "&:before": {
-      content: "''",
+    "&:after": {
+      content: "'Not available now: out of stock'",
       position: "absolute",
       left: 0,
-      top: 0,
-
-      width: "calc(100% - 38px)",
-      height: "100%",
-
-      backgroundColor: COLORS.disabled.main,
-      opacity: "85%",
-    },
-    "&:after": {
-      content: "'out of stock'",
-      position: "absolute",
-      left: "50%",
       top: "50%",
-      transform: "translate(-50%, -50%)",
+      transform: "translateY(-50%)",
       display: "inline-block",
+      width: "calc(100% - 40px)",
+      textAlign: "center",
       fontSize: 20,
-      fontWeight: "bold",
+      fontWeight: "normal",
       color: COLORS.selected.main,
+    },
+
+    "& $item__td:not(:last-child)": {
+      opacity: "15%",
+      pointerEvents: "none",
     },
   },
 

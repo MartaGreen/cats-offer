@@ -6,22 +6,13 @@ import { CardType } from "../../../types/card.type";
 
 import styles from "./Footer.style";
 
-function Footer({
-  data,
-  isSelected,
-  changeSelection,
-  isDisabled,
-}: {
-  data: CardType;
-  isSelected: boolean;
-  changeSelection: React.Dispatch<React.SetStateAction<boolean>>;
-  isDisabled: boolean;
-}) {
+function Footer({ data }: { data: CardType }) {
   const classes = styles();
   const dispatch = useDispatch();
+  const isSelected = !!data.isSelected;
+  const isDisabled = !!data.isDisabled;
 
   const onSelectionChange = () => {
-    changeSelection((selection: boolean) => !selection);
     if (!isSelected) dispatch(addItem(data));
     dispatch(cardSelectionChange(data));
   };

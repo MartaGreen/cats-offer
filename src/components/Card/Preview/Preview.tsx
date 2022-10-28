@@ -10,23 +10,14 @@ import { cardSelectionChange } from "../../../redux/slices/cards.slice";
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
 
-function Preview({
-  data,
-  isSelected,
-  changeSelection,
-  isDisabled,
-}: {
-  data: CardType;
-  isSelected: boolean;
-  changeSelection: React.Dispatch<React.SetStateAction<boolean>>;
-  isDisabled: boolean;
-}) {
+function Preview({ data }: { data: CardType }) {
   const classes = styles();
   const previewContainer = useRef(null);
+  const isSelected = !!data.isSelected;
+  const isDisabled = !!data.isDisabled;
   const dispatch = useDispatch();
 
   const onSelectCard = () => {
-    changeSelection((selection: boolean) => !selection);
     if (!isSelected) dispatch(addItem(data));
     if (isSelected) dispatch(rmItem(data));
     dispatch(cardSelectionChange(data));

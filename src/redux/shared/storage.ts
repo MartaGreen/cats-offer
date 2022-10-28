@@ -20,7 +20,7 @@ export const updateStorage = (
   selection: boolean | undefined,
   disablement: boolean | undefined
 ) => {
-  const clonedState = new Array(...current(state));
+  const clonedState = [...state];
   const index: number = clonedState.findIndex(
     (item) => item.id === updatedCard.id
   );

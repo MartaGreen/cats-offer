@@ -18,7 +18,13 @@ function CustomCard({ defaultData }: { defaultData?: CardType }) {
 
   return (
     <div className={`${previewCardStyles.preview} ${classes.customCard}`}>
-      {(!isInProcess && (
+      {(isInProcess && (
+        <CreateCardForm
+          defaultData={defaultData}
+          changeProcessState={setIsInProcess}
+          mode="create"
+        />
+      )) || (
         <div
           className={`${previewCardStyles.preview__inner} ${classes.customCard__inner}`}
           onClick={onStartNewCardCreation}
@@ -26,12 +32,6 @@ function CustomCard({ defaultData }: { defaultData?: CardType }) {
           <h2 className={previewCardStyles.description__title}>New Card</h2>
           <div className={classes.customCard__addBtn}></div>
         </div>
-      )) || (
-        <CreateCardForm
-          defaultData={defaultData}
-          changeProcessState={setIsInProcess}
-          mode="create"
-        />
       )}
     </div>
   );

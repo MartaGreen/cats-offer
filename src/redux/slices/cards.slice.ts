@@ -72,7 +72,7 @@ const cardsSlice = createSlice({
       const index = clonedState.findIndex((item) => item.id === editedCard.id);
       clonedState[index] = editedCard;
 
-      console.log(clonedState);
+      setCardsStorage(clonedState);
       return clonedState;
     },
   },

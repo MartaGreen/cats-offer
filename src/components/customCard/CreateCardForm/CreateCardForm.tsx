@@ -6,8 +6,7 @@ import CustomCardStyle from "../CustomCard.style";
 import idGenerator from "../../../shared/idGenerator";
 import { useDispatch } from "react-redux";
 import { addCard, editCard } from "../../../redux/slices/cards.slice";
-
-import { Form } from "react-final-form";
+import { updateCart } from "../../../redux/slices/cart.slice";
 
 import { CARD_CREATION_FIELDS } from "../../../constants/customCard.constants";
 import {
@@ -16,6 +15,7 @@ import {
 } from "../../../types/customCards.type";
 import { CardType } from "../../../types/card.type";
 
+import { Form } from "react-final-form";
 import Checkbox from "../../Checkbox/Checkbox";
 import FormField from "../FormField/FormField";
 
@@ -28,11 +28,6 @@ function CreateCardForm({
   defaultData?: CardType;
   mode: "create" | "edit";
 }) {
-  const classes = styles();
-  const previewCardClasses = previewCardStyles();
-  const customCardClasses = CustomCardStyle();
-  const dispatch = useDispatch();
-
   const [formFields, setFormFields] = useState(() => {
     if (!defaultData) return CARD_CREATION_FIELDS;
 
@@ -51,16 +46,23 @@ function CreateCardForm({
     return defaultFields;
   });
 
+  const classes = styles();
+  const previewCardClasses = previewCardStyles();
+  const customCardClasses = CustomCardStyle();
+  const dispatch = useDispatch();
+
+  const strToBoolean = (value: string) => JSON.parse(value || "false");
+
   const fieldValidation = (value: CreationFieldType | undefined) =>
     !value?.value;
 
   const changeDisablement = () => {
     setFormFields((state) => {
-      const disablementField = { ...state.isDisabled };
-      const value: boolean = Boolean(disablementField?.value);
+      const disablementField: CreationFieldType = { ...state.isDisabled };
+      const value: boolean = !strToBoolean(disablementField.value);
       disablementField.value = value.toString();
 
-      return { ...state, ...disablementField };
+      return { ...state, ...{ isDisabled: disablementField } };
     });
   };
 
@@ -71,17 +73,18 @@ function CreateCardForm({
   const onSubmitCreation = () => {
     const newCard: CardType = {
       id: defaultData?.id || idGenerator(),
-      taste: formFields.taste?.value || "",
-      servingsAmount: Number(formFields.servingsAmount?.value) || 0,
+      taste: formFields.taste.value,
+      servingsAmount: Number(formFields.servingsAmount.value) || 0,
       selectedMsg: formFields.selectedMsg?.value || "",
-      isSelected: Boolean(formFields.isSelected?.value),
-      isDisabled: Boolean(formFields.isDisabled?.value),
+      isSelected: defaultData?.isSelected || false,
+      isDisabled: strToBoolean(formFields.isDisabled.value),
     };
 
     if (mode === "edit") dispatch(editCard(newCard));
     if (mode === "create") dispatch(addCard(newCard));
 
     changeProcessState(false);
+    dispatch(updateCart(newCard));
   };
 
   return (
@@ -96,10 +99,10 @@ function CreateCardForm({
           <div>
             {(Object.keys(formFields) as Array<CreationFormIdsType>).map(
               (field: CreationFormIdsType) => {
-                const fieldData: CreationFieldType | undefined =
-                  formFields[field];
+                const fieldData: CreationFieldType = formFields[field];
+
                 return (
-                  (fieldData?.type === "text" && (
+                  (fieldData.type === "text" && (
                     <FormField
                       name={field}
                       data={fieldData}
@@ -108,14 +111,14 @@ function CreateCardForm({
                       validate={fieldValidation}
                     />
                   )) ||
-                  (fieldData?.type === "checkbox" && (
+                  (fieldData.type === "checkbox" && (
                     <div className={classes.form__disableField} key={field}>
                       <span className={classes.disableField__text}>
                         Disable:{" "}
                       </span>
 
                       <Checkbox
-                        isChecked={Boolean(fieldData?.value)}
+                        isChecked={strToBoolean(fieldData.value)}
                         changeChecking={changeDisablement}
                         id={idGenerator()}
                       />

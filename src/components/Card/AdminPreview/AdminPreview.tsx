@@ -13,19 +13,12 @@ import MousesOffers from "../../Offer/Mouses/MousesOffer";
 import Checkbox from "../../Checkbox/Checkbox";
 import CreateCardForm from "../../customCard/CreateCardForm/CreateCardForm";
 
-function AdminPreview({
-  data,
-  isDisabled,
-  changeDisablement,
-}: {
-  data: CardType;
-  isDisabled: boolean;
-  changeDisablement: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+function AdminPreview({ data }: { data: CardType }) {
   const [isEditProcess, setIsEditProcess] = useState(false);
 
   const classes = styles();
   const adminClasses = adminStyles();
+  const isDisabled = !!data.isDisabled;
 
   const dispatch = useDispatch();
 
@@ -35,9 +28,8 @@ function AdminPreview({
   const mouseWordForms = { singular: "mice", plural: "mouses" };
 
   const onDisablementChange = (): void => {
-    changeDisablement((state) => !state);
-    dispatch(cardDisablementChange(data));
     dispatch(updateCart(data));
+    dispatch(cardDisablementChange(data));
   };
 
   const onEditCard = () => {
