@@ -20,6 +20,15 @@ export default createUseStyles({
       background: COLORS.default.hover,
     },
   },
+
+  preview_inCart: {
+    position: "absolute",
+    top: 15,
+    right: 20,
+    width: 40,
+    height: 40,
+  },
+
   preview__inner: {
     position: "relative",
     height: "100%",

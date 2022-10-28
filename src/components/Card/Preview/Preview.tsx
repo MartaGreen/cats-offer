@@ -9,6 +9,7 @@ import { cardSelectionChange } from "../../../redux/slices/cards.slice";
 
 import ServingsOffer from "../../Offer/Servings/ServingsOffer";
 import MousesOffers from "../../Offer/Mouses/MousesOffer";
+import cartIcon from "../../../../assets/images/cart.svg";
 
 function Preview({ data }: { data: CardType }) {
   const classes = styles();
@@ -56,6 +57,16 @@ function Preview({ data }: { data: CardType }) {
       onClick={onSelectCard}
     >
       <div className={classes.preview__inner}>
+        {isSelected && (
+          <div className={classes.preview_inCart}>
+            <img
+              src={cartIcon}
+              alt="cart"
+              style={{ display: "inline-block", width: "100%" }}
+            />
+          </div>
+        )}
+
         <div className={classes.preview__description}>
           <h2 className={classes.description__title}>Yummy</h2>
           <h3 className={classes.description__taste}>{data.taste}</h3>
