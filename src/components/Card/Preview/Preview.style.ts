@@ -121,7 +121,7 @@ export default createUseStyles({
       },
 
       "& $preview__description:before": {
-        content: "'Kote disapproves?'",
+        content: "'Mouser disapproves?'",
         color: "#E62E7A",
       },
     },
