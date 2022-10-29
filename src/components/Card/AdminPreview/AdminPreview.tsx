@@ -28,7 +28,7 @@ function AdminPreview({ data }: { data: CardType }) {
   const mouseWordForms = { singular: "mice", plural: "mouses" };
 
   const onDisablementChange = (): void => {
-    dispatch(updateCart(data));
+    dispatch(updateCart({ ...data, isDisabled: !isDisabled }));
     dispatch(cardDisablementChange(data));
   };
 
